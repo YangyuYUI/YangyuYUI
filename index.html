@@ -1,11 +1,144 @@
-<!DOCTYPE html>
-<html lang="zh-TW">
-<head>
-  <meta charset="UTF-8" />
-  <title>我的靜態網站</title>
-</head>
-<body>
-  <h1>歡迎來到我的靜態網站！</h1>
-  <p>這是用 GitHub Pages 架設的網站。</p>
-</body>
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arcanova｜阿卡諾瓦</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      .icon-btn{border:0;background:transparent;color:var(--muted);font-size:17px;cursor:pointer;padding:2px}.icon-btn:hover{color:var(--gold)}
+      .hero-panel{display:grid;grid-template-columns:1fr 1fr;gap:20px}.career-card,.inventory-card{padding:26px}.career-card>p:not(.eyebrow){color:var(--muted);line-height:1.8}.profession-options{display:none;grid-template-columns:1fr 1fr;gap:10px;margin-top:20px}.profession-options.unlocked,.modal-options{display:grid}.profession-options button{padding:15px;text-align:left;background:#242522;border:1px solid var(--line);color:var(--ink);cursor:pointer}.profession-options button:hover{border-color:var(--gold);background:#313027}.profession-options b,.profession-options small{display:block}.profession-options small{color:var(--muted);font-size:10px;margin-top:3px}.inventory-list{margin-top:18px}.inventory-hint{margin-top:16px;color:var(--muted);font-size:11px;line-height:1.7}.loot-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-top:1px solid var(--line)}.loot-item>span{font-size:20px;color:var(--gold)}.loot-item p{margin:0;flex:1}.loot-item b,.loot-item small{display:block}.loot-item small,.empty-state{color:var(--muted);font-size:11px}.loot-item em{font-style:normal;color:var(--gold);font-size:11px}.loot-item.is-equipped{background:rgba(159,217,196,.06);box-shadow:inset 2px 0 0 #6fae94}.equipped-tag{color:#9fd9c4;font-weight:700}.equip-btn{flex:0 0 auto;border:1px solid #a87836;background:#342819;color:var(--gold-light);padding:7px 12px;font-size:10px;font-weight:700;cursor:pointer}.equip-btn:hover{background:#4b3922}.equip-btn:disabled{opacity:.4;cursor:not-allowed;background:#342819}.choice-window{max-width:580px;width:100%;background:linear-gradient(135deg,#2c2924,#171816);border:1px solid #8b7042;padding:32px;text-align:center;box-shadow:0 20px 80px #000}.choice-window>p:not(.eyebrow){color:var(--muted)}.modal-options button{text-align:center}@media(max-width:780px){.hero-panel{grid-template-columns:1fr}.loot-item{flex-wrap:wrap}}
+      .market-panel{display:grid;gap:20px}.market-intro{padding:28px}.market-intro>p:not(.eyebrow){color:var(--muted);line-height:1.8}.market-note{margin-top:17px;color:var(--gold);font-size:11px}.market-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.shop-card{padding:25px}.shop-card h2{margin-bottom:15px}.shop-item{display:flex;align-items:center;gap:12px;border-top:1px solid var(--line);padding:15px 0}.shop-item>span{font-size:25px;color:var(--gold)}.shop-item p{margin:0;flex:1}.shop-item b,.shop-item small{display:block}.shop-item small,.market-disabled{font-size:11px;color:var(--muted);line-height:1.7}.buy-btn{border:1px solid #a87836;background:#342819;color:var(--gold-light);padding:8px 10px;cursor:pointer;font-weight:700}.buy-btn:hover{background:#4b3922}.secondary-btn:disabled{opacity:.45;cursor:not-allowed}@media(max-width:780px){.market-grid{grid-template-columns:1fr}}
+      .tier-badge{display:inline-block;padding:3px 9px;border:1px solid var(--tier-color,var(--gold));color:var(--tier-color,var(--gold));font-size:10px;font-weight:700;border-radius:2px;letter-spacing:1px}
+      .affix-chip{display:inline-block;padding:3px 8px;background:#241f1a;border:1px solid var(--line);color:#e7c98a;font-size:10px;border-radius:2px;cursor:help}
+      .enemy-tags{display:flex;justify-content:center;flex-wrap:wrap;gap:6px;margin:8px 0 2px}
+      .enemy-intent{color:var(--gold);font-size:12px;font-weight:700;margin-top:5px;height:18px}
+      .enemy-intent span{font-size:14px}
+      .player-dots{display:flex;justify-content:center;gap:5px;margin-top:6px;height:16px}
+      .dot-tag{font-size:10px;padding:2px 6px;border-radius:2px;font-weight:bold;color:#fff}
+      .dot-tag.scorch{background:rgba(219,103,92,0.3);border:1px solid rgba(219,103,92,0.8)}
+      .dot-tag.venom{background:rgba(159,217,196,0.3);border:1px solid rgba(159,217,196,0.8)}
+      .item-affixes{margin-top:5px;display:flex;flex-wrap:wrap;gap:5px}
+      .item-affixes span{font-size:10px;color:#9fd9c4;background:#182420;border:1px solid #2c3d34;padding:2px 6px;border-radius:2px}
+      .hero-bonuses{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+      .hero-bonuses span{font-size:10px;color:#9fd9c4;background:#182420;border:1px solid #2c3d34;padding:3px 7px;border-radius:2px}
+      .codex-panel{text-align:left;padding:32px}.codex-panel>h2{margin-top:6px}.codex-intro{color:var(--muted);line-height:1.8;max-width:640px}
+      .codex-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:24px}
+      .codex-block{background:linear-gradient(135deg,rgba(40,38,36,.9),rgba(22,23,23,.85));border:1px solid var(--line);padding:18px}
+      .codex-block h3{font:600 12px Cinzel,'Noto Sans TC';color:var(--gold);letter-spacing:1px;margin:0 0 10px}
+      .codex-list .empty-state{color:var(--muted);font-size:11px}
+      .codex-tier-row,.codex-affix-row,.codex-monster-row{display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line);font-size:11px}
+      .codex-tier-row:first-child,.codex-affix-row:first-child,.codex-monster-row:first-child{border-top:0}
+      .codex-tier-row small,.codex-affix-row small{color:var(--muted)}
+      .codex-monster-row span{font-size:18px;color:var(--gold)}
+      @media(max-width:780px){.codex-grid{grid-template-columns:1fr}}
+      .event-tag{display:inline-block;margin-bottom:8px;padding:3px 9px;border:1px solid var(--tag-color,var(--gold));color:var(--tag-color,var(--gold));font-size:10px;font-weight:700;letter-spacing:1px;border-radius:2px}
+      .event-window{max-width:520px;width:100%;background:linear-gradient(135deg,#2c2924,#171816);border:1px solid #8b7042;padding:30px;text-align:center;box-shadow:0 20px 80px #000;position:relative}
+      .event-window .close-modal{position:absolute;right:13px;top:9px}
+      .event-icon{font-size:38px;color:var(--gold);margin-bottom:4px}
+      .event-window p:not(.eyebrow){color:var(--muted);line-height:1.8}
+      .event-options{display:grid;gap:10px;margin-top:20px;text-align:left}
+      .event-options button{background:#242522;border:1px solid var(--line);color:var(--ink);padding:13px 15px;cursor:pointer}
+      .event-options button:hover{border-color:var(--gold);background:#313027}
+      .event-options button b{display:block;font-size:13px}
+      .event-options button small{display:block;color:var(--muted);font-size:10px;margin-top:4px}
+    </style>
+  </head>
+  <body>
+    <div class="mist mist-one"></div><div class="mist mist-two"></div>
+    <main class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#"><span class="brand-mark">✦</span><span>ARCANOVA<small>阿卡諾瓦 · 法則修復者</small></span></a>
+        <div class="resources"><span title="金幣">◈ <b id="gold">120</b></span><span title="靈魂碎片">✧ <b id="shards">0</b></span><button id="save-btn" class="icon-btn" title="儲存進度" aria-label="儲存進度">▣</button><button id="reset-btn" class="icon-btn" title="重設原型" aria-label="重設原型">↻</button></div>
+      </header>
+
+      <section class="world-banner">
+        <div><p class="eyebrow">第一大陸 · 人類起源</p><h1>曙光邊境</h1><p class="world-copy">起源法則正逐漸崩毀。踏入灰燼，讓世界再次記起它最初的名字。</p></div>
+        <div class="level-badge"><span>修復者等級</span><strong id="level">1</strong><em>LV</em></div>
+      </section>
+
+      <nav class="tabs" aria-label="遊戲導覽"><button class="active" data-tab="journey">旅程</button><button data-tab="hero">英雄</button><button data-tab="codex">圖鑑</button><button data-tab="market">市集</button></nav>
+
+      <section id="journey" class="tab-panel active">
+        <div class="layout-grid">
+          <section class="panel exploration-panel">
+            <div class="panel-heading"><div><p class="eyebrow">當前區域</p><h2>碎石荒原</h2></div><span class="status-pill">● 可探索</span></div>
+            <div class="scene-art"><div class="sun"></div><div class="mountain m1"></div><div class="mountain m2"></div><div class="ruin">⌇</div><div class="scene-label">風穿越破碎的方尖碑</div></div>
+            <span id="event-tag" class="event-tag">遭遇戰</span>
+            <p id="event-text" class="event-text">遠方傳來低沉的石鳴。一座被灰燼掩埋的古老守衛，似乎正在甦醒。</p>
+            <div class="action-row"><button id="explore-btn" class="primary-btn">踏入荒原 <span>→</span></button><button id="rest-btn" class="secondary-btn">短暫休整</button></div>
+          </section>
+
+          <aside class="panel hero-card">
+            <div class="panel-heading"><div><p class="eyebrow">你的隊伍</p><h2>孤星旅團</h2></div><span class="class-tag" id="class-name">旅人</span></div>
+            <div class="hero-summary"><div class="portrait">✧</div><div><strong id="hero-name">艾琳</strong><span>人類 · 法則修復者</span><div class="xp-track"><i id="xp-bar"></i></div><small><span id="xp">0</span> / <span id="xp-next">100</span> 經驗</small></div></div>
+            <div class="stats"><div><span>生命</span><strong id="hp-value">100 / 100</strong><i class="hp"><b id="hp-bar"></b></i></div><div><span>力量</span><strong id="atk">16</strong></div><div><span>防禦</span><strong id="def">7</strong></div><div><span>速度</span><strong id="spd">12</strong></div></div>
+            <div class="equipment"><p class="eyebrow">裝備</p>
+              <div><span>⚔</span><p><b id="eq-weapon-name">尚未裝備</b><small id="eq-weapon-sub">武器欄位是空的</small></p><em id="eq-weapon-value"></em></div>
+              <div><span>◈</span><p><b id="eq-armor-name">尚未裝備</b><small id="eq-armor-sub">防具欄位是空的</small></p><em id="eq-armor-value"></em></div>
+              <div><span>✧</span><p><b id="eq-accessory-name">尚未裝備</b><small id="eq-accessory-sub">飾品欄位是空的</small></p><em id="eq-accessory-value"></em></div>
+            </div>
+            <div class="equipment consumables"><p class="eyebrow">藥劑</p>
+              <div><span>✚</span><p><b>餘燼藥劑 <span id="potion-count">0</span> 瓶</b><small id="potion-sub">尚未持有，可到市集的補給商人購買</small></p><button id="potion-quick-btn" class="equip-btn" disabled>飲用</button></div>
+            </div>
+            <div class="hero-bonuses" id="hero-bonuses"></div>
+          </aside>
+        </div>
+
+        <section class="boss-section panel">
+          <div class="boss-copy"><p class="eyebrow">世界級地牢 · 起源法則</p><h2>灰燼巨像 <span>WORLD BOSS</span></h2><p>全服修復進度正在推進。每一次挑戰，都將你的傷害化為修復世界的一束微光。</p></div>
+          <div class="boss-progress"><div class="boss-numbers"><b id="boss-hp">10,000</b><span>/ 10,000 HP</span><em id="boss-percent">100%</em></div><div class="world-track"><i id="boss-bar"></i></div><small><span id="world-mode">原型世界 · 尚未連線至伺服器</span>　·　你的累積貢獻：<b id="contribution">0</b></small></div>
+          <button id="boss-btn" class="boss-btn">挑戰巨像 <span>⚔</span></button>
+        </section>
+
+        <section class="lower-grid">
+          <section class="panel announcements"><div class="panel-heading"><div><p class="eyebrow">世界回響</p><h2>公告</h2></div><span class="live-dot">DEMO</span></div><ul id="announcement-list"><li><time>現在</time><p>灰燼巨像正在等待第一位挑戰者。</p></li><li><time>提示</time><p>本版本的世界進度只會記錄你的行動。</p></li></ul></section>
+          <section class="panel law-card"><p class="eyebrow">待修復法則</p><div class="law-symbol">⌘</div><h2>起源</h2><p>擊敗灰燼巨像後，將解鎖角色的職業抉擇。</p><div class="law-reward">下一個里程碑：<b>職業系統</b></div></section>
+        </section>
+      </section>
+
+      <section id="hero" class="tab-panel hero-panel"><div class="panel career-card"><p class="eyebrow">職業道路</p><h2 id="career-title">尚未覺醒</h2><p id="career-copy">持續探索、擊敗敵人，讓起源法則辨認你的道路。</p>
+      <div id="profession-options" class="profession-options">
+        <button data-profession="獵人"><b>獵人</b><small>力量 +4・速度 +2・暴擊 +8%<br>技能「獵人直覺」：必定暴擊的致命一擊</small></button>
+        <button data-profession="鍊金師"><b>鍊金師</b><small>生命 +24・防禦 +2・藥效 +50%<br>技能「緊急調配」：戰鬥中立即大量回血</small></button>
+        <button data-profession="鐵匠"><b>鐵匠</b><small>力量 +2・防禦 +4・格擋 +8%<br>技能「鋼鐵之軀」：大幅減傷並反彈傷害</small></button>
+        <button data-profession="學者"><b>學者</b><small>速度 +3・戰利品機率 +15%<br>技能「洞察弱點」：削弱敵人並提升你的精準度</small></button>
+      </div>
+      <div id="branch-options-container" class="profession-options"></div>
+      </div><div class="panel inventory-card"><div class="panel-heading"><div><p class="eyebrow">行囊</p><h2>已獲得裝備</h2></div><span id="inventory-count" class="class-tag">0 件</span></div><p class="inventory-hint">每個裝備欄位（武器／防具／飾品）同時只能裝備一件；只有目前裝備中的物品才會提供屬性加成。撿到的新裝備若該欄位是空的會自動裝備，否則會先收進行囊，可點擊「裝備」替換，或點擊「卸下」清空欄位。</p><div id="inventory-list" class="inventory-list"><p class="empty-state">尚未獲得裝備。探索荒原、擊敗敵人吧。</p></div></div></section>
+      <section id="codex" class="tab-panel codex-panel">
+        <p class="eyebrow">旅途圖鑑</p><h2>未知仍比已知更廣闊</h2>
+        <p class="codex-intro">荒原中潛藏著不同威脅分級的生物，部分強敵會帶有特殊詞綴，讓每次遭遇都不盡相同。你遭遇過的種類與詞綴會被記錄於此。</p>
+        <div class="codex-grid">
+          <div class="codex-block"><h3>威脅分級</h3><div id="codex-tiers" class="codex-list"></div></div>
+          <div class="codex-block"><h3>已知詞綴</h3><div id="codex-affixes" class="codex-list"></div></div>
+          <div class="codex-block"><h3>荒原生物</h3><div id="codex-monsters" class="codex-list"></div></div>
+          <div class="codex-block"><h3>旅途見聞</h3><div id="codex-lore" class="codex-list"></div></div>
+        </div>
+      </section>
+      <section id="market" class="tab-panel market-panel"><div class="panel market-intro"><p class="eyebrow">第一大陸 · 曙光市集</p><h2>餘燼交易所</h2><p>在前往荒原前，旅人會在這裡交換補給與從遺跡中帶回的裝備。</p><div class="market-note">玩家拍賣與直接提案將在伺服器版本上線後開放。</div></div><div class="market-grid"><section class="panel shop-card"><p class="eyebrow">補給商人</p><h2>實用補給</h2><div class="shop-item"><span>✚</span><p><b>餘燼藥劑</b><small>購買後收入行囊，可在探索或戰鬥中飲用恢復生命（戰鬥中使用會消耗一個回合）</small></p><button class="buy-btn" data-buy="potion">35 ◈</button></div><div class="shop-item"><span>▣</span><p><b>遺跡裝備箱</b><small>開出一件隨機裝備</small></p><button class="buy-btn" data-buy="chest">85 ◈</button></div></section><section class="panel shop-card"><p class="eyebrow">寄售櫃台</p><h2>拍賣行</h2><p class="market-disabled">跨玩家競標、直售與提案交換需要帳號、物品所有權與伺服器交易鎖；目前先保留入口。</p><button class="secondary-btn" disabled>即將開放</button></section></div></section>
+    </main>
+
+    <div id="battle-modal" class="modal" aria-hidden="true"><div class="battle-window"><button class="close-modal" id="close-modal" aria-label="關閉">×</button><p class="eyebrow" id="battle-kind">遭遇戰</p><h2 id="enemy-name">灰燼守衛</h2><div class="enemy-tags" id="enemy-tags"></div><p id="enemy-intent" class="enemy-intent"></p><div class="battle-arena"><div class="combatant enemy"><div class="monster-icon" id="monster-icon">♜</div><b id="enemy-hp-text">80 / 80</b><div class="health-track enemy-hp"><i id="enemy-hp-bar"></i></div></div><div class="versus">VS</div><div class="combatant player"><div class="player-icon">✦</div><b id="player-hp-text">100 / 100</b><div class="health-track player-hp"><i id="battle-player-hp"></i></div><div id="player-dots" class="player-dots"></div></div></div><div id="battle-log" class="battle-log">灰燼守衛阻擋了去路。</div><div class="battle-actions">
+      <button id="attack-btn" class="primary-btn">斬擊 <small>造成傷害</small></button>
+      <button id="guard-btn" class="secondary-btn">防禦 <small>減少下次傷害</small></button>
+      <button id="skill-btn" class="secondary-btn" disabled>職業技能 <small>Lv.5 選擇生活職業後解鎖</small></button>
+      <button id="potion-btn" class="secondary-btn" disabled>飲下藥劑 <small>行囊中沒有藥劑，先到市集購買</small></button>
+    </div></div></div>
+    <div id="profession-modal" class="modal" aria-hidden="true"><div class="choice-window"><p class="eyebrow">起源法則已回應</p><h2>選擇你的生活職業</h2><p>這個選擇將塑造你的第一段成長道路。</p><div class="profession-options modal-options">
+        <button data-profession="獵人"><b>獵人</b><small>力量 +4・速度 +2・暴擊 +8%<br>技能「獵人直覺」：必定暴擊的致命一擊</small></button>
+        <button data-profession="鍊金師"><b>鍊金師</b><small>生命 +24・防禦 +2・藥效 +50%<br>技能「緊急調配」：戰鬥中立即大量回血</small></button>
+        <button data-profession="鐵匠"><b>鐵匠</b><small>力量 +2・防禦 +4・格擋 +8%<br>技能「鋼鐵之軀」：大幅減傷並反彈傷害</small></button>
+        <button data-profession="學者"><b>學者</b><small>速度 +3・戰利品機率 +15%<br>技能「洞察弱點」：削弱敵人並提升你的精準度</small></button>
+      </div></div></div>
+    <div id="branch-modal" class="modal" aria-hidden="true"><div class="choice-window"><p class="eyebrow">極致的道路</p><h2>選擇你的進階職業分支</h2><p>踏入更高的境界，獲得強大的專屬技能與被動效果。</p><div id="modal-branch-options" class="profession-options modal-options"></div></div></div>
+    <div id="event-modal" class="modal" aria-hidden="true"><div class="event-window"><button class="close-modal" id="close-event-modal" aria-label="關閉">×</button><p class="eyebrow" id="event-modal-kind">神秘遭遇</p><div class="event-icon" id="event-modal-icon">✧</div><h2 id="event-modal-title">未知事件</h2><p id="event-modal-text"></p><div id="event-modal-options" class="event-options"></div></div></div>
+    <div id="toast" class="toast" role="status"></div>
+    <script src="js/data.js"></script>
+    <script src="js/state.js"></script>
+    <script src="js/main.js"></script>
+  </body>
 </html>
